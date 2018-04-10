@@ -3,9 +3,9 @@ package com.charse.taskflow.manager;
 import java.util.Map;
 
 /**
- * @author: wangyj
- * @date: 2018/4/10 21:56
- * @description: 定义一个TaskFlow 管理器
+ * @Author: wangyj
+ * @Date: 2018/4/10 21:56
+ * @Description: 定义一个TaskFlow 管理器
  * 负责初始化、执行任务链
  **/
 public interface ITaskFlowManager {
