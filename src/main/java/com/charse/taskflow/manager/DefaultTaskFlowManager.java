@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @Author: wangyj
  * @Date: 2018/4/10 22:30
- * @Description:
+ * @Description: 默认管理器的实现
  **/
 public class DefaultTaskFlowManager implements ITaskFlowManager {
 

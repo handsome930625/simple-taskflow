@@ -1,6 +1,6 @@
 package com.charse.taskflow.configure;
 
-import com.charse.taskflow.taskFlow.ITaskFlow;
+import com.charse.taskflow.taskflow.ITaskFlow;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface IConfigure {
     /**
      * 默认的xml规则
      */
-    String DEFAULT_TASK_FLOW_RULE_XML = "/com/gome/architect/taskflow/configure/TaskFlowRule.xml";
+    String DEFAULT_TASK_FLOW_RULE_XML = "TaskFlowRule.xml";
 
     /**
      * <p>功能描述: 读取配置文件创建task集合</p>
@@ -27,6 +27,7 @@ public interface IConfigure {
      * <p>创建日期: 2018/4/10 22:41 </p>
      *
      * @return 每一个文件的task集合
+     * @throws Exception 异常情况
      */
-    List<ITaskFlow> buildTaskFlow();
+    List<ITaskFlow> buildTaskFlow() throws Exception;
 }

@@ -22,8 +22,9 @@ public interface ITaskFlowManager {
      * <p>创建人: wangyj </p>
      * <p>创建日期: 2018/4/10 22:08 </p>
      *
-     * @param taskFlowId taskFlow 标识
+     * @param taskFlowId taskflow 标识
      * @param params     入参
+     * @return 执行结果参数
      * @throws Exception 执行任务链中抛出的异常
      */
     Map<String, Object> executeFlow(String taskFlowId, Object params) throws Exception;

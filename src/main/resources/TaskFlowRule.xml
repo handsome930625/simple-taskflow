@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE digester-rules PUBLIC "-//Jakarta Apache //DTD digester-rules XML V1.0//EN" "digester-rules.dtd">
+<digester-rules>
+    <pattern value="taskflows">
+        <object-create-rule classname="com.charse.taskflow.configure.definition.TaskFlowsDefinition"/>
+        <pattern value="taskflow">
+            <object-create-rule classname="com.charse.taskflow.configure.definition.TaskFlowDefinition"/>
+            <set-properties-rule>
+                <alias attr-name="id" prop-name="id"/>
+                <alias attr-name="start-task" prop-name="startTask"/>
+                <alias attr-name="implType" prop-name="implType"/>
+            </set-properties-rule>
+            <pattern value="filters">
+                <object-create-rule classname="com.charse.taskflow.configure.definition.FiltersDefinition"/>
+                <pattern value="filter">
+                    <object-create-rule classname="com.charse.taskflow.configure.definition.FilterDefinition"/>
+                    <set-properties-rule>
+                        <alias attr-name="class" prop-name="className"/>
+                        <alias attr-name="bean" prop-name="beanId"/>
+                    </set-properties-rule>
+                    <set-next-rule methodname="addFilter"/>
+                </pattern>
+                <set-next-rule methodname="setFilters"/>
+            </pattern>
+            <pattern value="task">
+                <object-create-rule classname="com.charse.taskflow.configure.definition.TaskDefinition"/>
+                <set-properties-rule>
+                    <alias attr-name="id" prop-name="id"/>
+                    <alias attr-name="class" prop-name="className"/>
+                </set-properties-rule>
+                <pattern value="invoke">
+                    <object-create-rule classname="com.charse.taskflow.configure.definition.InvokeDefinition"/>
+                    <set-properties-rule>
+                        <alias attr-name="class" prop-name="className"/>
+                        <alias attr-name="bean" prop-name="bean"/>
+                        <alias attr-name="method" prop-name="method"/>
+                    </set-properties-rule>
+                    <set-next-rule methodname="setInvoke"/>
+                </pattern>
+                <pattern value="results">
+                    <object-create-rule classname="com.charse.taskflow.configure.definition.ResultsDefinition"/>
+                    <pattern value="result">
+                        <object-create-rule classname="com.charse.taskflow.configure.definition.ResultDefinition"/>
+                        <set-properties-rule>
+                            <alias attr-name="name" prop-name="name"/>
+                            <alias attr-name="next-task" prop-name="nextTask"/>
+                        </set-properties-rule>
+                        <set-next-rule methodname="addResult"/>
+                    </pattern>
+                    <set-next-rule methodname="setResults"/>
+                </pattern>
+                <set-next-rule methodname="addTask"/>
+            </pattern>
+            <set-next-rule methodname="addTaskFlow"/>
+        </pattern>
+    </pattern>
+</digester-rules>
