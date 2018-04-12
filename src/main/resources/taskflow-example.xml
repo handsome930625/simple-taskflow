@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taskflows xmlns="http://www.w3school.com.cn"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="taskflows.xsd">
+    <taskflow id="taskId" implType="default" start-task="">
+        <filters>
+            <filter bean="diyFilter"/>
+        </filters>
+        <task id="">
+            <invoke bean="diyClass" method="diyMethod"/>
+        </task>
+    </taskflow>
+</taskflows>

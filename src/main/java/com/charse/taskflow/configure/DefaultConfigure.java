@@ -57,7 +57,7 @@ public class DefaultConfigure implements IConfigure {
             xmlConfigureParser = DigesterLoader.createDigester(resource.getURL());
             xmlConfigureParser.setValidating(false);
             xmlConfigureParser.setUseContextClassLoader(true);
-        } catch (IOException e) {
+        } catch (Exception e) {
             // 解析xml 规则失败，让程序停止
             throw new DefinitionException(ErrorMessageConstant.DEFINITION_XML_RULE_ERROR, e);
         }
@@ -152,5 +152,14 @@ public class DefaultConfigure implements IConfigure {
     }
 
     public static void main(String[] args) {
+        Resource[] resources = new Resource[1];
+        Resource resource = new ClassPathResource("taskflow-example.xml");
+        resources[0] = resource;
+        IConfigure configure = new DefaultConfigure(resources);
+        try {
+            configure.buildTaskFlow();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
