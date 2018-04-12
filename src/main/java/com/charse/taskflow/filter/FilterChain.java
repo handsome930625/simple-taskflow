@@ -3,6 +3,7 @@ package com.charse.taskflow.filter;
 import com.charse.taskflow.taskflow.TaskFlowContext;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,14 +18,13 @@ public class FilterChain {
      */
     private List<Filter> filters;
 
-    private int index;
+    private Iterator<Filter> iterator;
 
     public FilterChain(List<Filter> filters) {
         if (filters == null) {
             filters = Collections.emptyList();
         }
         this.filters = filters;
-        this.index = 0;
     }
 
     /**
@@ -37,9 +37,12 @@ public class FilterChain {
      * @throws Exception 执行异常
      */
     public void doFilter(Object params, TaskFlowContext taskFlowContext) throws Exception {
-        if (index == this.filters.size()) {
-            return;
+        if (this.iterator == null) {
+            this.iterator = this.filters.iterator();
         }
-        filters.get(index++).doFilter(params, taskFlowContext, this);
+        if (this.iterator.hasNext()) {
+            Filter nextFilter = this.iterator.next();
+            nextFilter.doFilter(params, taskFlowContext, this);
+        }
     }
 }
