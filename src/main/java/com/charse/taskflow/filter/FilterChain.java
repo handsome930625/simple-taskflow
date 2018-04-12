@@ -2,8 +2,8 @@ package com.charse.taskflow.filter;
 
 import com.charse.taskflow.taskflow.TaskFlowContext;
 
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @Author: wangyj
@@ -15,10 +15,16 @@ public class FilterChain {
     /**
      * 过滤链
      */
-    private LinkedList<Filter> filters;
+    private List<Filter> filters;
 
-    public FilterChain(LinkedList<Filter> filters) {
+    private int index;
+
+    public FilterChain(List<Filter> filters) {
+        if (filters == null) {
+            filters = Collections.emptyList();
+        }
         this.filters = filters;
+        this.index = 0;
     }
 
     /**
@@ -31,13 +37,9 @@ public class FilterChain {
      * @throws Exception 执行异常
      */
     public void doFilter(Object params, TaskFlowContext taskFlowContext) throws Exception {
-        Filter filter;
-        try {
-            filter = filters.pop();
-        } catch (NoSuchElementException e) {
-            // 链到头了 直接返回
+        if (index == this.filters.size()) {
             return;
         }
-        filter.doFilter(params, taskFlowContext, this);
+        filters.get(index++).doFilter(params, taskFlowContext, this);
     }
 }
