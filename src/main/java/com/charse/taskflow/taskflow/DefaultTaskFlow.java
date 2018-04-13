@@ -3,6 +3,7 @@ package com.charse.taskflow.taskflow;
 import com.charse.taskflow.configure.definition.InvokeDefinition;
 import com.charse.taskflow.configure.definition.TaskDefinition;
 import com.charse.taskflow.filter.Filter;
+import com.charse.taskflow.filter.FilterChain;
 import com.charse.taskflow.utils.SpringBeanHelper;
 
 import java.util.List;
@@ -46,7 +47,8 @@ public class DefaultTaskFlow implements ITaskFlow {
 
     @Override
     public void executeTask(Object params, TaskFlowContext taskFlowContext) throws Exception {
-
+        FilterChain filterChain = new FilterChain(filters);
+        filterChain.doFilter(params, taskFlowContext);
     }
 
     public List<Filter> getFilters() {
@@ -81,7 +83,7 @@ public class DefaultTaskFlow implements ITaskFlow {
     }
 
     @Override
-    public void setTask(List<TaskDefinition> taskDefinitionList) throws Exception {
+    public void setTask(List<TaskDefinition> taskDefinitionList) {
         for (TaskDefinition taskDefinition : taskDefinitionList) {
             String taskId = taskDefinition.getId();
             DefaultTask task = new DefaultTask();

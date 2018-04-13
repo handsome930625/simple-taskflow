@@ -1,5 +1,6 @@
 package com.charse.taskflow.utils;
 
+import com.charse.taskflow.Exception.DefinitionException;
 import com.charse.taskflow.configure.DefaultConfigure;
 import com.charse.taskflow.constant.ErrorMessageConstant;
 import org.apache.commons.lang.StringUtils;
@@ -48,10 +49,9 @@ public class SpringBeanHelper implements ApplicationContextAware {
      * @param className 全类名
      * @param clazz     bean的类型
      * @return bean 的例子
-     * @throws Exception 异常
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getBean(String bean, String className, Class<T> clazz) throws Exception {
+    public static <T> T getBean(String bean, String className, Class<T> clazz) {
         if (StringUtils.isNotBlank(bean)) {
             return applicationContext.getBean(bean, clazz);
         } else if (StringUtils.isNotBlank(className)) {
@@ -65,13 +65,13 @@ public class SpringBeanHelper implements ApplicationContextAware {
                 return t;
             } catch (Exception e) {
                 LOGGER.error(ErrorMessageConstant.CLASS_NOT_FOUND + ":" + className, e);
-                throw new ClassNotFoundException(e.getMessage(), e);
+                throw new DefinitionException(e.getMessage(), e);
             }
         }
         return null;
     }
 
-    public static Object getBean(String bean, String className) throws Exception {
+    public static Object getBean(String bean, String className) {
         return getBean(bean, className, Object.class);
     }
 }

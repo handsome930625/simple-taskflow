@@ -65,7 +65,6 @@ public interface ITaskFlow {
      * <p>创建日期: 2018/4/11 22:17 </p>
      *
      * @param taskDefinitionList xml 中 task 配置
-     * @throws Exception 异常
      */
-    void setTask(List<TaskDefinition> taskDefinitionList) throws Exception;
+    void setTask(List<TaskDefinition> taskDefinitionList);
 }

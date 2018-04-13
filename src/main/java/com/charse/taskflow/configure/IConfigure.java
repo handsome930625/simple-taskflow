@@ -27,7 +27,6 @@ public interface IConfigure {
      * <p>创建日期: 2018/4/10 22:41 </p>
      *
      * @return 每一个文件的task集合
-     * @throws Exception 异常情况
      */
-    List<ITaskFlow> buildTaskFlow() throws Exception;
+    List<ITaskFlow> buildTaskFlow();
 }

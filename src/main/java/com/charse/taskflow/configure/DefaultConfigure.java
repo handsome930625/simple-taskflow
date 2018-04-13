@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -51,7 +52,7 @@ public class DefaultConfigure implements IConfigure {
      *
      * @param configResources 配置的task xml 文件
      */
-    public DefaultConfigure(Resource[] configResources) {
+    public DefaultConfigure(List<Resource> configResources) {
         try {
             Resource resource = new ClassPathResource(DEFAULT_TASK_FLOW_RULE_XML);
             xmlConfigureParser = DigesterLoader.createDigester(resource.getURL());
@@ -72,8 +73,8 @@ public class DefaultConfigure implements IConfigure {
      * @param resources 所有 taskflow 文件
      * @return 所有的任务流
      */
-    private TaskFlowsDefinition parse(Resource[] resources) {
-        if (resources == null || resources.length == 0) {
+    private TaskFlowsDefinition parse(List<Resource> resources) {
+        if (CollectionUtils.isEmpty(resources)) {
             LOGGER.warn("taskflow files is empty,please check it");
             return null;
         }
@@ -121,7 +122,7 @@ public class DefaultConfigure implements IConfigure {
 
 
     @Override
-    public List<ITaskFlow> buildTaskFlow() throws Exception {
+    public List<ITaskFlow> buildTaskFlow() {
         List<ITaskFlow> taskFlowList = new ArrayList<>();
         for (TaskFlowDefinition taskFlowDefinition : taskFlowsDefinition.getTaskFlowList()) {
             // 目前就一种实现方式,不排除出现多种情况
@@ -152,14 +153,14 @@ public class DefaultConfigure implements IConfigure {
     }
 
     public static void main(String[] args) {
-        Resource[] resources = new Resource[1];
-        Resource resource = new ClassPathResource("taskflow-example.xml");
-        resources[0] = resource;
-        IConfigure configure = new DefaultConfigure(resources);
-        try {
-            configure.buildTaskFlow();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        Resource[] resources = new Resource[1];
+//        Resource resource = new ClassPathResource("taskflow-example.xml");
+//        resources[0] = resource;
+//        IConfigure configure = new DefaultConfigure(resources);
+//        try {
+//            configure.buildTaskFlow();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }
