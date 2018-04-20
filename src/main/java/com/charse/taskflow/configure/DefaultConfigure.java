@@ -5,7 +5,7 @@ import com.charse.taskflow.configure.definition.FilterDefinition;
 import com.charse.taskflow.configure.definition.TaskFlowDefinition;
 import com.charse.taskflow.configure.definition.TaskFlowsDefinition;
 import com.charse.taskflow.constant.ErrorMessageConstant;
-import com.charse.taskflow.enumer.TaskFlowEnum;
+import com.charse.taskflow.taskflow.enumer.TaskFlowEnum;
 import com.charse.taskflow.filter.Filter;
 import com.charse.taskflow.filter.FirstFilter;
 import com.charse.taskflow.filter.LastFilter;
@@ -150,17 +150,5 @@ public class DefaultConfigure implements IConfigure {
             taskFlowList.add(taskFlow);
         }
         return taskFlowList;
-    }
-
-    public static void main(String[] args) {
-//        Resource[] resources = new Resource[1];
-//        Resource resource = new ClassPathResource("taskflow-example.xml");
-//        resources[0] = resource;
-//        IConfigure configure = new DefaultConfigure(resources);
-//        try {
-//            configure.buildTaskFlow();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 }

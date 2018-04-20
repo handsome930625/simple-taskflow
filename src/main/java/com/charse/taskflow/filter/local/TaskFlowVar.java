@@ -13,9 +13,9 @@ public class TaskFlowVar {
      */
     private long startTime;
     /**
-     * 结束时间
+     * 耗时
      */
-    private long endTime;
+    private long totalTime;
     /**
      * taskId
      */
@@ -37,14 +37,21 @@ public class TaskFlowVar {
     /**
      * 执行之后方法
      */
-    public void afterExecute(long startNano) {
+    public void afterExecute() {
         long endTime = System.currentTimeMillis();
+        totalTime = endTime - startTime;
     }
 
+    /**
+     * <p>功能描述: 日志</p>
+     * <p>创建人: wangyj </p>
+     * <p>创建日期: 2018/4/14 17:59 </p>
+     */
+    public String log() {
+        return "taskflow-id:" + taskId + "唯一性id:" + uuid + "耗时:" + totalTime + "ms";
+    }
 
-    public String successLog() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("taskflow-id:").append(taskId).append("唯一性id:").append(uuid).append("耗时:").append("");
-        return super.toString();
+    public String getUuid() {
+        return uuid;
     }
 }

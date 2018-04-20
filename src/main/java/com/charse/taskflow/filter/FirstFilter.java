@@ -4,6 +4,8 @@ import com.charse.taskflow.filter.local.TaskFlowVar;
 import com.charse.taskflow.filter.local.TaskflowThreadLocal;
 import com.charse.taskflow.taskflow.ITaskFlow;
 import com.charse.taskflow.taskflow.TaskFlowContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @Author: wangyj
@@ -12,12 +14,26 @@ import com.charse.taskflow.taskflow.TaskFlowContext;
  **/
 public class FirstFilter implements Filter {
 
+    /**
+     * 日志
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FirstFilter.class);
+
     @Override
     public void doFilter(Object params, TaskFlowContext taskFlowContext, FilterChain filterChain) throws Exception {
+        // 获取线程变量 记录访问时间，taskflow过程中可能存在的参数
         ITaskFlow taskFlow = taskFlowContext.getTaskFlow();
         String taskFlowId = taskFlow.getId();
         TaskFlowVar taskFlowVar = TaskflowThreadLocal.getTaskFlowVar();
-        //taskFlowVar.beforeExecute();
-        filterChain.doFilter(params, taskFlowContext);
+        taskFlowVar.beforeExecute(taskFlowId);
+        try {
+            filterChain.doFilter(params, taskFlowContext);
+            taskFlowVar.afterExecute();
+            // 打印日志
+            LOGGER.info(taskFlowVar.log());
+        } catch (Exception e) {
+            LOGGER.error("taskFlowId:{} uuid:{}出现错误{}", taskFlowId, taskFlowVar.getUuid(), e.getMessage(), e);
+            throw e;
+        }
     }
 }

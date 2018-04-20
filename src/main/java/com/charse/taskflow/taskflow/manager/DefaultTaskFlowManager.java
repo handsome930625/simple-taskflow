@@ -1,17 +1,15 @@
-package com.charse.taskflow.manager;
+package com.charse.taskflow.taskflow.manager;
 
 import com.charse.taskflow.Exception.TaskFlowNotFoundException;
 import com.charse.taskflow.configure.DefaultConfigure;
 import com.charse.taskflow.configure.IConfigure;
 import com.charse.taskflow.taskflow.ITaskFlow;
 import com.charse.taskflow.taskflow.TaskFlowContext;
-import org.springframework.core.io.ClassPathResource;
+import com.charse.taskflow.utils.ResourceUtils;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: wangyj
@@ -54,14 +52,19 @@ public class DefaultTaskFlowManager implements ITaskFlowManager {
 
     }
 
-
     public void setLocations(String[] locations) {
         if (locations == null || locations.length == 0) {
             throw new IllegalArgumentException("locations 参数不能为空");
         }
-        for (String location : locations) {
-            Resource resource = new ClassPathResource(location);
-            resources.add(resource);
+        List<Resource> resourceList = new ArrayList<Resource>();
+        for (String locationPattern : locations) {
+            if (StringUtils.isEmpty(locationPattern)) {
+                continue;
+            }
+
+            Resource[] resources = ResourceUtils.getResources(locationPattern);
+            resourceList.addAll(Arrays.asList(resources));
         }
+        resources = resourceList;
     }
 }

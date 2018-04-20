@@ -1,4 +1,4 @@
-package com.charse.taskflow.enumer;
+package com.charse.taskflow.taskflow.enumer;
 
 /**
  * @Author: wangyj

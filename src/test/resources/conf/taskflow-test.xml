@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taskflows>
+    <taskflow id="taskId" implType="default" start-task="step_first">
+        <task id="step_first">
+            <invoke bean="stepFirst" method="handle"/>
+            <results>
+                <result name="R1" next-task="step_second"/>
+            </results>
+        </task>
+    </taskflow>
+</taskflows>

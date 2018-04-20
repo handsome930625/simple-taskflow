@@ -6,6 +6,7 @@ import com.charse.taskflow.filter.Filter;
 import com.charse.taskflow.filter.FilterChain;
 import com.charse.taskflow.utils.SpringBeanHelper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class DefaultTaskFlow implements ITaskFlow {
     /**
      * flow 中 任务的集合
      */
-    private Map<String, ITask> taskMap;
+    private Map<String, ITask> taskMap = new HashMap<>();
 
     public void setId(String id) {
         this.id = id;
@@ -61,12 +62,12 @@ public class DefaultTaskFlow implements ITaskFlow {
 
     @Override
     public ITask getStartTask() {
-        return null;
+        return taskMap.get(startTaskId);
     }
 
     @Override
     public ITask getTask(String taskId) {
-        return null;
+        return taskMap.get(taskId);
     }
 
     public String getStartTaskId() {

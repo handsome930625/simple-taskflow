@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+     ">
+    <bean id="stepFirst" class="testone.StepFirst">
+        <property name="stepSecond" ref="stepSecond"/>
+    </bean>
+    <bean id="stepSecond" class="testone.StepSecond">
+    </bean>
+    <bean id="commitAspect" class="com.charse.taskflow.transaction.aspect.CommitAspect"/>
+    <bean class="com.charse.taskflow.utils.SpringBeanHelper"/>
+    <bean id="taskFlowManager" class="com.charse.taskflow.taskflow.manager.DefaultTaskFlowManager"
+          init-method="initManager" destroy-method="destroyManager">
+        <property name="locations">
+            <array>
+                <value>classpath:/conf/taskflow-test.xml</value>
+            </array>
+        </property>
+    </bean>
+</beans>
