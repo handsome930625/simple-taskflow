@@ -1,0 +1,24 @@
+{
+	"info": {
+		"_postman_id": "e5c1f194-3a21-4224-a7b8-b72511fa050b",
+		"name": "test git",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test git",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
