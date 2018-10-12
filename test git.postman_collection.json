@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e5c1f194-3a21-4224-a7b8-b72511fa050b",
+		"_postman_id": "bcfdacf5-8128-4b34-9440-5b2d6a75bbaa",
 		"name": "test git",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,10 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "123",
+					"host": [
+						"123"
+					]
 				}
 			},
 			"response": []
